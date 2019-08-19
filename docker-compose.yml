@@ -1,0 +1,16 @@
+version: '2.1'
+services:
+  site:
+    image: "lopydev/php-7.2-cli-stretch"
+    container_name: "dev_sharedsway_di"
+    volumes:
+      - app:/app
+    user: "debian"
+    working_dir: '/app'
+volumes:
+  app:
+    driver: local
+    driver_opts:
+      type: none
+      device: $PWD
+      o: bind
