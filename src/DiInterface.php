@@ -9,19 +9,11 @@
 
 /*
  +------------------------------------------------------------------------+
- | Phalcon Framework                                                      |
+ | Code from Phalcon Framework                                            |
  +------------------------------------------------------------------------+
- | Copyright (c) 2011-2017 Phalcon Team (https://phalconphp.com)          |
+ | Phalcon Team (https://phalconphp.com)                                  |
  +------------------------------------------------------------------------+
- | This source file is subject to the New BSD License that is bundled     |
- | with this package in the file LICENSE.txt.                             |
- |                                                                        |
- | If you did not receive a copy of the license and are unable to         |
- | obtain it through the world-wide-web, please send an email             |
- | to license@phalconphp.com so we can send you a copy immediately.       |
- +------------------------------------------------------------------------+
- | Authors: Andres Gutierrez <andres@phalconphp.com>                      |
- |          Eduar Carvajal <eduar@phalconphp.com>                         |
+ | Source of Phalcon (https://github.com/phalcon/cphalcon)                |
  +------------------------------------------------------------------------+
  */
 
@@ -30,9 +22,9 @@ use Sharedsway\Di\Library;
 
 
 /**
- * Phalcon\DiInterface
+ * Sharedsway\\Di\DiInterface
  *
- * Interface for Phalcon\Di
+ * Interface for Sharedsway\\Di\Di
  */
 interface DiInterface extends \ArrayAccess
 {
@@ -89,10 +81,10 @@ interface DiInterface extends \ArrayAccess
      * @param array parameters
      * @return mixed
      */
-	public function getShared(?string $name, $parameters );
+	public function getShared(?string $name, ?$parameters =null );
 
     /**
-     * Sets a service using a raw Phalcon\Di\Service definition
+     * Sets a service using a raw Sharedsway\\Di\Di\Service definition
      * @param null|string $name
      * @param Library\ServiceInterface $rawDefinition
      * @return Library\ServiceInterface
@@ -108,7 +100,7 @@ interface DiInterface extends \ArrayAccess
 	public function getRaw(?string $name);
 
     /**
-     * Returns the corresponding Phalcon\Di\Service instance for a service
+     * Returns the corresponding Sharedsway\\Di\Di\Service instance for a service
      * @param null|string $name
      * @return Library\ServiceInterface
      */
@@ -136,8 +128,8 @@ interface DiInterface extends \ArrayAccess
      * Registers a service provider.
      *
      * <code>
-     * use Phalcon\DiInterface;
-     * use Phalcon\Di\ServiceProviderInterface;
+     * use Sharedsway\\Di\DiInterface;
+     * use Sharedsway\\Di\Di\ServiceProviderInterface;
      *
      * class SomeServiceProvider implements ServiceProviderInterface
      * {

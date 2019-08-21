@@ -6,6 +6,15 @@
  * Time: 下午7:14
  */
 
+/*
+ +------------------------------------------------------------------------+
+ | Code from Phalcon Framework                                            |
+ +------------------------------------------------------------------------+
+ | Phalcon Team (https://phalconphp.com)                                  |
+ +------------------------------------------------------------------------+
+ | Source of Phalcon (https://github.com/phalcon/cphalcon)                |
+ +------------------------------------------------------------------------+
+ */
 
 namespace Sharedsway\Di;
 
@@ -18,43 +27,8 @@ use Sharedsway\Event;
 use Sharedsway\Di\Library\ServiceProviderInterface;
 use Sharedsway\Common;
 
-/**
- * Phalcon\Di
- *
- * Phalcon\Di is a component that implements Dependency Injection/Service Location
- * of services and it's itself a container for them.
- *
- * Since Phalcon is highly decoupled, Phalcon\Di is essential to integrate the different
- * components of the framework. The developer can also use $this component to inject dependencies
- * and manage global instances of the different classes used in the application.
- *
- * Basically, $this component implements the `Inversion of Control` pattern. Applying $this,
- * the objects do not receive their dependencies using setters or constructors, but requesting
- * a service dependency injector. $this reduces the overall complexity, since there is only one
- * way to get the required dependencies within a component.
- *
- * Additionally, $this pattern increases testability in the code, thus making it less prone to errors.
- *
- *<code>
- * use Phalcon\Di;
- * use Phalcon\Http\Request;
- *
- * $di = new Di();
- *
- * // Using a string definition
- * $di->set("request", Request::class, true);
- *
- * // Using an anonymous function
- * $di->setShared(
- *     "request",
- *     function () {
- *         return new Request();
- *     }
- * );
- *
- * $request = $di->getRequest();
- *</code>
- */
+
+
 class Di implements DiInterface
 {
     /**
@@ -83,17 +57,22 @@ class Di implements DiInterface
     /**
      * Latest DI build
      */
-//protected static $_default;
+    protected static $_default;
 
     /**
-     * Phalcon\Di constructor
+     * Sharedsway\Di\Di constructor
+     *
+     * 想了一下，把这部分加上
+     *
+     * 在swoole中使用时，需要重写该方法，避免使用静态变量
+     *
      */
     public function __construct()
     {
-//        $di = self::_default;
-//		if( !di ){
-//            $self::_default = $this;
-//		}
+        $di = self::$_default;
+		if( !$di ){
+            self::$_default = $this;
+		}
     }
 
 
@@ -182,7 +161,7 @@ class Di implements DiInterface
     }
 
     /**
-     * Sets a service using a raw Phalcon\Di\Service definition
+     * Sets a service using a raw Sharedsway\\Di\Di\Service definition
      * @param null|string $name
      * @param ServiceInterface $rawDefinition
      * @return ServiceInterface
@@ -210,7 +189,7 @@ class Di implements DiInterface
     }
 
     /**
-     * Returns a Phalcon\Di\Service instance
+     * Returns a Sharedsway\\Di\Di\Service instance
      * @param null|string $name
      * @return ServiceInterface
      * @throws \Sharedsway\Di\Exception
@@ -289,7 +268,7 @@ class Di implements DiInterface
         }
 
         /**
-         * Pass the DI itself if the instance implements \Phalcon\Di\InjectionAwareInterface
+         * Pass the DI itself if the instance implements \Sharedsway\\Di\Di\InjectionAwareInterface
          */
         if (is_object($instance)) {
             if ($instance instanceof InjectionAwareInterface) {
@@ -322,7 +301,7 @@ class Di implements DiInterface
      * @return mixed|null|\stdClass
      * @throws \Sharedsway\Di\Exception
      */
-    public function getShared(?string $name, $parameters = null)
+    public function getShared(?string $name, ?$parameters = null)
     {
 
         /**
@@ -391,7 +370,7 @@ class Di implements DiInterface
      * Allows to register a shared service using the array syntax
      *
      *<code>
-     * $di["request"] = new \Phalcon\Http\Request();
+     * $di["request"] = new \Sharedsway\\Di\Http\Request();
      *</code>
      * @param mixed $name
      * @param mixed $definition
@@ -479,8 +458,8 @@ class Di implements DiInterface
      * Registers a service provider.
      *
      * <code>
-     * use Phalcon\DiInterface;
-     * use Phalcon\Di\ServiceProviderInterface;
+     * use Sharedsway\\Di\DiInterface;
+     * use Sharedsway\\Di\Di\ServiceProviderInterface;
      *
      * class SomeServiceProvider implements ServiceProviderInterface
      * {
@@ -502,37 +481,45 @@ class Di implements DiInterface
 
     /**
      * Set a default dependency injection container to be obtained into static methods
+     *
+     * 想了一下，把这部分加上
+     *
+     * 在swoole中使用时，需要重写该方法，避免使用静态变量
+     *
      * @param \Sharedsway\Di\DiInterface $dependencyInjector
      * @return mixed|void
-     * @throws Common\Exception
      */
     public static function setDefault(DiInterface $dependencyInjector)
     {
-//        $self::_default = dependencyInjector;
-        throw new Common\Exception('暂时不用 setDefault');
+        self::$_default = $dependencyInjector;
     }
 
 
     /**
      * Return the latest DI created
+     *
+     * 想了一下，把这部分加上
+     *
+     * 在swoole中使用时，需要重写该方法，避免使用静态变量
+     *
      * @return \Sharedsway\Di\DiInterface
-     * @throws Common\Exception
      */
     public static function getDefault(): DiInterface
     {
-        //return self::_default;
-        throw new Common\Exception('暂时不用 getDefault');
+        return self::$_default;
     }
 
 
     /**
      * Resets the internal default DI
-     * @throws Common\Exception
+     *
+     * 想了一下，把这部分加上
+     *
+     * 在swoole中使用时，需要重写该方法，避免使用静态变量
      */
     public static function reset()
     {
-        //$self::_default = null;
-        throw new Common\Exception('暂时不用 reset');
+        self::$_default = null;
     }
 
 

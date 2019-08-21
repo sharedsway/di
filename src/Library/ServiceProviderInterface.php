@@ -8,6 +8,15 @@
 namespace Sharedsway\Di\Library;
 use Sharedsway\Di\DiInterface;
 
+/*
+ +------------------------------------------------------------------------+
+ | Code from Phalcon Framework                                            |
+ +------------------------------------------------------------------------+
+ | Phalcon Team (https://phalconphp.com)                                  |
+ +------------------------------------------------------------------------+
+ | Source of Phalcon (https://github.com/phalcon/cphalcon)                |
+ +------------------------------------------------------------------------+
+ */
 
 interface ServiceProviderInterface
 {
