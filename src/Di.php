@@ -19,8 +19,6 @@
 namespace Sharedsway\Di;
 
 use Sharedsway\Di\Library\Service;
-use Sharedsway\Di\DiInterface;
-use Sharedsway\Di\Exception;
 use Sharedsway\Di\Library\ServiceInterface;
 use Sharedsway\Di\Library\InjectionAwareInterface;
 use Sharedsway\Event;
@@ -207,7 +205,7 @@ class Di implements DiInterface
     /**
      * @param $className
      * @param null $params
-     * @return mixed|object
+     * @return mixed|\stdClass
      * @throws Exception
      */
     private function makeInstance($className,$params=null)

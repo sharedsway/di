@@ -129,7 +129,7 @@ class Builder
     /**
      * @param $className
      * @param null $params
-     * @return mixed|object
+     * @return mixed|\stdClass
      * @throws Exception
      */
     private function makeInstance($className, $params = null)
@@ -158,6 +158,7 @@ class Builder
      */
     public function build(DiInterface $dependencyInjector, ?array $definition, $parameters = null)
     {
+        $instance = null;
 
         /**
          * The class name is required

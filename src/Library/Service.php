@@ -29,7 +29,6 @@ namespace Sharedsway\Di\Library;
 use Sharedsway\Di\DiInterface;
 use Sharedsway\Di\Exception;
 use Sharedsway\Di\Library\Service\Builder;
-use Sharedsway\Di\Library\ServiceInterface;
 
 /**
  * Sharedsway\Di\Service
@@ -82,6 +81,7 @@ class Service implements ServiceInterface
 
     /**
      * Sets if the service is shared or not
+     * @param bool $shared
      */
     public function setShared(bool $shared): void
     {
@@ -129,7 +129,7 @@ class Service implements ServiceInterface
     /**
      * @param $className
      * @param null $params
-     * @return mixed|object
+     * @return mixed|\stdClass
      * @throws Exception
      */
     private function makeInstance($className,$params=null)
@@ -152,9 +152,8 @@ class Service implements ServiceInterface
      * Resolves the service
      * @param null $parameters
      * @param DiInterface|null $dependencyInjector
-     * @return mixed|null|object
+     * @return mixed|null|\stdClass
      * @throws Exception
-     * @throws \ReflectionException
      */
     public function resolve($parameters = null, DiInterface $dependencyInjector = null)
     {
@@ -241,8 +240,13 @@ class Service implements ServiceInterface
         return $instance;
     }
 
+
     /**
      * Changes a parameter in the definition without resolve the service
+     * @param int $position
+     * @param array|null $parameter
+     * @return \Sharedsway\Di\Library\ServiceInterface
+     * @throws Exception
      */
     public function setParameter(int $position, ?array $parameter): ServiceInterface
     {
@@ -277,11 +281,12 @@ class Service implements ServiceInterface
         return $this;
     }
 
+
     /**
      * Returns a parameter in a specific position
-     *
-     * @param int position
-     * @return array
+     * @param int $position
+     * @return null
+     * @throws Exception
      */
     public function getParameter(int $position)
     {
@@ -312,8 +317,12 @@ class Service implements ServiceInterface
         return $this->_resolved;
     }
 
+
     /**
      * Restore the internal state of a service
+     * @param array|null $attributes
+     * @return \Sharedsway\Di\Library\ServiceInterface
+     * @throws Exception
      */
     public static function __set_state(?array $attributes): ServiceInterface
     {
