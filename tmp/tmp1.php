@@ -8,14 +8,12 @@
 
 
 /**
- * @param null|string $aa
+ * @param null $name
  */
-function aaaa(?string $aa){
-
-    var_dump($aa);
+function hello(?string $name ){
+    var_dump($name);
 }
 
-aaaa(null);
+//
 
-
-
+hello();

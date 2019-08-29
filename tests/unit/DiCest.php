@@ -368,6 +368,17 @@ class DiCest
     {
 
     }
+
+    public function testSetShare(UnitTester $I)
+    {
+        $obj = new DiCestExampleB('Jim');
+        $this->phDi->setShared('hello', $obj);
+        $obj2 = $this->phDi->get('hello');
+        $obj3 = $this->phDi->getShared('hello');
+
+        $I->assertEquals($obj, $obj2);
+        $I->assertEquals($obj, $obj3);
+    }
 }
 
 class DiCestExampleA

@@ -18,6 +18,7 @@
  */
 
 namespace Sharedsway\Di;
+
 use Sharedsway\Di\Library;
 
 
@@ -37,7 +38,7 @@ interface DiInterface extends \ArrayAccess
      * @param bool $shared
      * @return Library\ServiceInterface
      */
-    public function set(?string $name, $definition, bool $shared = false) : Library\ServiceInterface;
+    public function set(?string $name, $definition, bool $shared = false): Library\ServiceInterface;
 
     /**
      * Registers an "always shared" service in the services container
@@ -45,14 +46,14 @@ interface DiInterface extends \ArrayAccess
      * @param $definition
      * @return Library\ServiceInterface
      */
-	public function setShared(?string $name, $definition) : Library\ServiceInterface;
+    public function setShared(?string $name, $definition): Library\ServiceInterface;
 
     /**
      * Removes a service in the services container
      * @param null|string $name
      * @return mixed
      */
-	public function remove(?string $name);
+    public function remove(?string $name);
 
     /**
      * Attempts to register a service in the services container
@@ -63,25 +64,25 @@ interface DiInterface extends \ArrayAccess
      * @param bool $shared
      * @return Library\ServiceInterface| bool
      */
-	public function attempt(?string $name, $definition, bool $shared = false) ;
+    public function attempt(?string $name, $definition, bool $shared = false);
 
-	/**
+    /**
      * Resolves the service based on its configuration
      *
      * @param string name
      * @param array parameters
      * @return mixed
      */
-	public function get(?string $name, $parameters = null);
+    public function get(?string $name, $parameters = null);
 
-	/**
+    /**
      * Returns a shared service based on their configuration
      *
      * @param string name
      * @param array parameters
      * @return mixed
      */
-	public function getShared(?string $name, ?$parameters =null );
+    public function getShared(?string $name, $parameters = null);
 
     /**
      * Sets a service using a raw Sharedsway\\Di\Di\Service definition
@@ -89,40 +90,40 @@ interface DiInterface extends \ArrayAccess
      * @param Library\ServiceInterface $rawDefinition
      * @return Library\ServiceInterface
      */
-	public function setRaw(?string $name, Library\ServiceInterface $rawDefinition) : Library\ServiceInterface;
+    public function setRaw(?string $name, Library\ServiceInterface $rawDefinition): Library\ServiceInterface;
 
-	/**
+    /**
      * Returns a service definition without resolving
      *
      * @param string name
      * @return mixed
      */
-	public function getRaw(?string $name);
+    public function getRaw(?string $name);
 
     /**
      * Returns the corresponding Sharedsway\\Di\Di\Service instance for a service
      * @param null|string $name
      * @return Library\ServiceInterface
      */
-	public function getService(?string $name) : Library\ServiceInterface;
+    public function getService(?string $name): Library\ServiceInterface;
 
     /**
      * Check whether the DI contains a service by a name
      * @param null|string $name
      * @return bool
      */
-	public function has(?string $name) :bool;
+    public function has(?string $name): bool;
 
-	/**
+    /**
      * Check whether the last service obtained via getShared produced a fresh instance or an existing one
      */
-	public function wasFreshInstance() :  bool ;
+    public function wasFreshInstance(): bool;
 
     /**
      * Return the services registered in the DI
      * @return Library\ServiceInterface[]
      */
-	public function getServices() : array;
+    public function getServices(): array;
 
     /**
      * Registers a service provider.
@@ -151,16 +152,16 @@ interface DiInterface extends \ArrayAccess
      * @param DiInterface $dependencyInjector
      * @return mixed
      */
-	public static function setDefault(DiInterface $dependencyInjector);
+    public static function setDefault(DiInterface $dependencyInjector);
 
     /**
      * Return the last DI created
      * @return DiInterface
      */
-	public static function getDefault() : DiInterface;
+    public static function getDefault(): DiInterface;
 
-	/**
+    /**
      * Resets the internal default DI
      */
-	public static function reset();
+    public static function reset();
 }

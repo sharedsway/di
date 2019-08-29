@@ -26,7 +26,6 @@ use Sharedsway\Di\Library\ServiceProviderInterface;
 use Sharedsway\Common;
 
 
-
 class Di implements DiInterface
 {
     /**
@@ -68,9 +67,9 @@ class Di implements DiInterface
     public function __construct()
     {
         $di = self::$_default;
-		if( !$di ){
+        if (!$di) {
             self::$_default = $this;
-		}
+        }
     }
 
 
@@ -208,7 +207,7 @@ class Di implements DiInterface
      * @return mixed|\stdClass
      * @throws Exception
      */
-    private function makeInstance($className,$params=null)
+    private function makeInstance($className, $params = null)
     {
         try {
 
@@ -261,7 +260,7 @@ class Di implements DiInterface
                     throw new Exception("Service '" . $name . "' wasn't found in the dependency injection container");
                 }
 
-                $instance = $this->makeInstance($name,$parameters);
+                $instance = $this->makeInstance($name, $parameters);
             }
         }
 
@@ -299,7 +298,7 @@ class Di implements DiInterface
      * @return mixed|null|\stdClass
      * @throws \Sharedsway\Di\Exception
      */
-    public function getShared(?string $name, ?$parameters = null)
+    public function getShared(?string $name, $parameters = null)
     {
 
         /**
@@ -379,7 +378,6 @@ class Di implements DiInterface
         $this->setShared($name, $definition);
         return true;
     }
-
 
 
     /**
